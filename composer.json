@@ -1,0 +1,30 @@
+{
+    "name": "chriha/laravel-tracking",
+    "description": "Simple request tracking for Laravel.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Christopher Hartmann",
+            "email": "chriha84@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": "~7.1|~7.2"
+    },
+    "require-dev": {
+        "laravel/framework": "5.8.x-dev"
+    },
+    "autoload": {
+        "psr-4": {
+            "Chriha\\LaravelTracking\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Chriha\\LaravelTracking\\TrackingServiceProvider"
+            ]
+        }
+    }
+}
