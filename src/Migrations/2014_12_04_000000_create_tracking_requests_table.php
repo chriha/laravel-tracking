@@ -22,6 +22,7 @@ class CreateTrackingRequestsTable extends Migration
             $table->string( 'host' );
             $table->string( 'path' )->nullable();
             $table->string( 'query' )->nullable();
+            $table->string( 'content' )->nullable();
             $table->string( 'content_type' )->nullable();
             $table->string( 'referer' )->nullable();
             $table->enum( 'xhr', [ 'true', 'false' ] )->default( 'false' );
