@@ -4,6 +4,7 @@ namespace Chriha\LaravelTracking\Http\Middleware;
 
 use Carbon\Carbon;
 use Chriha\LaravelTracking\Jobs\StoreRequest;
+use Chriha\LaravelTracking\Models\Request as RequestModel;
 use Closure;
 use Illuminate\Http\Request;
 
@@ -18,6 +19,8 @@ class Tracking
 
         $url     = $request->server( 'HTTP_REFERER' );
         $referer = parse_url( $url );
+        $content = RequestModel::guardContent(
+            $request->getContent(), $request->isJson() );
 
         $data = [
             'method'       => $request->getMethod(),
@@ -25,7 +28,7 @@ class Tracking
             'host'         => $request->getHost(),
             'path'         => $request->path(),
             'query'        => $request->getQueryString(),
-            'content'      => $request->getContent(),
+            'content'      => $content,
             'content_type' => $request->getContentType(),
             'referer'      => $referer['host'] ?? null == $request->getHost()
                     ? $referer['path'] : $url,
@@ -38,7 +41,8 @@ class Tracking
 
         try
         {
-            dispatch( new StoreRequest( $data ) )->onQueue( config( 'tracking.queue' ) );
+            dispatch( new StoreRequest( $data ) )
+                ->onQueue( config( 'tracking.queue' ) );
         }
         catch ( \Exception $e )
         {

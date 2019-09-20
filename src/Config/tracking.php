@@ -22,4 +22,12 @@ return [
      * The queue to handle the request job
      */
     'queue' => 'default',
+
+    /**
+     * Specify form fields which should be guarded and replaced
+     * with ***
+     */
+    'guarded' => [
+        'password', 'password_confirmation'
+    ],
 ];
