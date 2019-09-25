@@ -31,7 +31,7 @@ class Tracking
             'content'      => $content,
             'content_type' => $request->getContentType(),
             'referer'      => $referer['host'] ?? null == $request->getHost()
-                    ? $referer['path'] : $url,
+                    ? ( $referer['path'] ?? null ) : $url,
             'xhr'          => $request->ajax() ? 'true' : 'false',
             'user_id'      => optional( $request->user( $guard ) )->id,
             'ip'           => $request->ip(),
